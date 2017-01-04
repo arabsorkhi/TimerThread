@@ -17,7 +17,7 @@ C# Timer Thread project. Enables variable timers (a la System.Threading.Timer), 
     // Common timer handler procedure. This will only be called on the timer thread created below.
     private void TimerProc(uint timerID)
     {
-       Console.WriteLine("TimerProc(" + timerID + ")");
+         Console.WriteLine("TimerProc(" + timerID + ")");
     }
 
     // Sample use code
