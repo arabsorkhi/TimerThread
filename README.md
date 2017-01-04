@@ -31,6 +31,7 @@ C# Timer Thread project. Enables variable timers (a la System.Threading.Timer), 
     
         // Timer B: triggered at 200 and 1200 milliseconds  
         TickTimer timerB = new TickTimer(2, 200, 1000, 2);
+        // Note: this example has both timers using the same handler, but they can use separate handlers as well
         timerB.Handler = TimerProcBasic;
 
         // Add timers to thread and start them
