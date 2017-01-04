@@ -11,3 +11,44 @@ C# Timer Thread project. Enables variable timers (a la System.Threading.Timer), 
 *ThreadBase - Simple thread base class, that has an abstract "Procedure" method that is run on the thread. Includes a "stop" event for derived classes to use for stopping a continuously looping Procedure implementation.
 
 *TickTimerThread - The thread to run TickTimers. Derived from ThreadBase. Contains a TickTimerQueue, and continuously loops, waiting for either the next TickTimer alarm to invoke, a change to the timers, or the "stop" event signal.
+
+#Sample Usage
+
+    // Common timer handler procedure
+    private void TimerProc(uint timerID)
+    {
+       Console.WriteLine("TimerProc(" + timerID + ")");
+    }
+
+    // Sample use code
+    public static void Main()
+    {
+        TickTimerThread timerThread = new TickTimerThread();
+    
+        // Timer A: triggered at 100, 600, and 1100 milliseconds
+        TickTimer timerA = new TickTimer(1, 100, 500, 3);
+        timerA.Handler = TimerProcBasic;
+    
+        // Timer B: triggered at 200 and 1200 milliseconds  
+        TickTimer timerB = new TickTimer(2, 200, 1000, 2);
+        timerB.Handler = TimerProcBasic;
+
+        // Add timers to thread and start them
+        timerThread.AddTimer(timerA);
+        timerThread.AddTimer(timerB);
+        timerThread.Start();
+
+        // Wait for timers to run
+        Thread.Sleep(2000);
+    
+        // Stop the thread
+        timerThread.Stop();
+    }
+
+# Sample Output
+
+    TimerProc(1)
+    TimerProc(2)
+    TimerProc(1)
+    TimerProc(1)
+    TimerProc(2)
