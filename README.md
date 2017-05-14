@@ -1,7 +1,7 @@
 # TimerThread
 C# Timer Thread project. Enables variable timers (a la System.Threading.Timer), but handled on a single dedicated thread instead of variable threads from the managed .Net thread pool. Also allows for customized timekeeping provider implementations.
 
-#Key Classes
+# Key Classes
 *TickProvider - Abstract class for "tick" timekeeping support. Derived classes use a specific "tick counter" mechanism to provide the current time used for timers, and support timekeeping arithmetic. Includes support to deal with tick counter "wraparound", where the counter hits the maximum value and starts over at zero. There are currently two specific implementations: TickProviderDateTime (the default one), and TickProviderEnvironment.
 
 *TickTimer - Timer class. Similar in intent to System.Threading.Timer, with an initial delay, timer period, and optionally finite count. Includes a handler delegate called when the timer alarm is triggered. Has a static TickProvider property for timekeeping and time arithmetic support.
@@ -12,7 +12,7 @@ C# Timer Thread project. Enables variable timers (a la System.Threading.Timer), 
 
 *TickTimerThread - The thread to run TickTimers. Derived from ThreadBase. Contains a TickTimerQueue, and continuously loops, waiting for either the next TickTimer alarm to invoke, a change to the timers, or the "stop" event signal.
 
-#Sample Usage
+# Sample Usage
 
     // Common timer handler procedure. This will only be called on the timer thread created below.
     private void TimerProc(uint timerID)
